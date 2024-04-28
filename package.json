@@ -1,5 +1,6 @@
 {
   "name": "socket-app",
+  "type": "module",
   "version": "1.0.0",
   "description": "this is a demo of a socket app",
   "main": "index.js",
