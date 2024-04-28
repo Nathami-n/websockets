@@ -11,8 +11,13 @@ const io = new Server(server);
 app.use('/', router);
 
 io.on('connection', (socket) => {
-    console.log("a user connected");
-})
+    socket.on('chat message', (msg)=> {
+        console.log("message: " + msg);
+        io.emit('chat message', `server says: ${msg}`);
+    })
+});
+
+
 
 
 server.listen(3000, ()=> {
