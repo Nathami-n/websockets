@@ -1,0 +1,15 @@
+{
+  "name": "socket-app",
+  "version": "1.0.0",
+  "description": "this is a demo of a socket app",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}
