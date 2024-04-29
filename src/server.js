@@ -28,15 +28,22 @@ const io = new Server(server, {
 app.use('/', router);
 
 io.on('connection', async (socket) => {
-    socket.on('chat message', async (msg)=> {
+    socket.on('chat message', async (msg, clientOffset, callback)=> {
         let result;
         try {
-            result = await db.run('INSERT INTO messages (content) VALUES (?)', msg)
+            result = await db.run('INSERT INTO messages (content, client_offset) VALUES (?, ?)', msg, clientOffset)
         } catch (e) {
-            return
-        }
+        if(e.errno === 19) {
+        callback();
+        } else {
+        //do nothing
+        };
+
+        return;
+    }
         console.log("message: " + msg);
         io.emit('chat message', `server says: ${msg}`, result.lastID);
+        callback();
     });
 
     if(!socket.recovered) {
